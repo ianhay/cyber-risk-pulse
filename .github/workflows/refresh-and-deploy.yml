@@ -1,0 +1,83 @@
+name: refresh-and-deploy
+
+on:
+  schedule:
+    # Twice daily at 01:17 and 13:17 UTC (offset from the hour to be a polite
+    # API citizen). CISA KEV and EPSS refresh daily; NVD is near-real-time.
+    - cron: "17 1,13 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never run two deploys at once, but let a running one finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e . jsonschema
+
+      # Restore the previously deployed data so the last-known-good guard has a
+      # baseline and a failed source can retain its prior output.
+      - name: Restore last-known-good data
+        uses: actions/cache@v4
+        with:
+          path: public/data
+          key: crp-data-${{ github.run_id }}
+          restore-keys: |
+            crp-data-
+
+      - name: Refresh from live sources
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: python scripts/refresh_data.py
+
+      - name: Validate generated site data
+        run: python scripts/validate_site.py
+
+      - name: Persist last-known-good data
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: public/data
+          key: crp-data-${{ github.run_id }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+
+      - name: Build site
+        env:
+          # Project Pages serve under /<repo>/. For a user/org Pages repo
+          # (e.g. username.github.io) set VITE_BASE to "/".
+          VITE_BASE: /${{ github.event.repository.name }}/
+          GITHUB_SHA: ${{ github.sha }}
+        run: npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

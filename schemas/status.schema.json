@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Cyber Risk Pulse status",
+  "type": "object",
+  "required": ["overall_status", "generated_at", "sources"],
+  "properties": {
+    "overall_status": { "type": "string", "enum": ["Current", "Degraded", "Stale"] },
+    "generated_at": { "type": "string" },
+    "app_version": { "type": "string" },
+    "build_commit": { "type": ["string", "null"] },
+    "fixture_mode": { "type": "boolean" },
+    "freshness": { "type": "object" },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "ok"],
+        "properties": {
+          "source": { "type": "string" },
+          "ok": { "type": "boolean" },
+          "record_count": { "type": "integer" },
+          "fetched_at": { "type": ["string", "null"] },
+          "used_last_known_good": { "type": "boolean" },
+          "message": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Cyber Risk Pulse summary",
+  "type": "object",
+  "required": ["window_days", "kpis", "tier_counts"],
+  "properties": {
+    "window_days": { "type": "integer" },
+    "generated_at": { "type": "string" },
+    "kpis": {
+      "type": "object",
+      "required": ["new_cves", "new_kev", "kev_catalogue_total", "high_epss", "critical", "p1", "total_scope"],
+      "additionalProperties": { "type": "integer" }
+    },
+    "tier_counts": { "type": "object", "additionalProperties": { "type": "integer" } },
+    "severity_counts": { "type": "object", "additionalProperties": { "type": "integer" } }
+  }
+}

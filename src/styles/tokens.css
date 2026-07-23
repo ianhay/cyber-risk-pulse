@@ -1,0 +1,113 @@
+/* Cyber Risk Pulse - design tokens
+ *
+ * Instrument-panel aesthetic: a calm slate base, one teal "pulse" accent, and
+ * a sequential P1->P4 ramp with red reserved for P1 only. Colour never encodes
+ * priority alone; every badge also carries a mono tier code and text.
+ * Themes are swapped via [data-theme] on <html>.
+ */
+
+:root {
+  /* Type */
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --fs-2xs: 0.6875rem;   /* 11px - dense table meta */
+  --fs-xs: 0.75rem;      /* 12px */
+  --fs-sm: 0.8125rem;    /* 13px */
+  --fs-base: 0.9375rem;  /* 15px */
+  --fs-md: 1.0625rem;    /* 17px */
+  --fs-lg: 1.375rem;     /* 22px */
+  --fs-xl: 1.875rem;     /* 30px */
+  --fs-2xl: 2.5rem;      /* 40px KPI numerals */
+
+  --lh-tight: 1.15;
+  --lh-normal: 1.5;
+
+  /* Spacing scale (4px base) */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-8: 3rem;
+
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 14px;
+
+  --ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  --shadow-panel: 0 24px 60px -20px rgba(0, 0, 0, 0.55);
+
+  /* Priority ramp - identifiers only; semantics attached in components */
+  --p1: #e5484d;
+  --p2: #f5a524;
+  --p3: #4c9aff;
+  --p4: #6e7a8a;
+  --p1-soft: rgba(229, 72, 77, 0.14);
+  --p2-soft: rgba(245, 165, 36, 0.14);
+  --p3-soft: rgba(76, 154, 255, 0.14);
+  --p4-soft: rgba(110, 122, 138, 0.16);
+
+  --sev-critical: #e5484d;
+  --sev-high: #f5a524;
+  --sev-medium: #4c9aff;
+  --sev-low: #6e7a8a;
+  --sev-unknown: #4a5568;
+
+  --ransomware: #d6409f;
+}
+
+/* Dark is the default operational theme. */
+:root,
+:root[data-theme="dark"] {
+  --bg: #0f1620;
+  --bg-grid: rgba(56, 189, 201, 0.04);
+  --surface: #18212e;
+  --surface-2: #212c3b;
+  --surface-3: #27344699;
+  --border: #2c3849;
+  --border-strong: #3a495c;
+  --text: #e6ecf2;
+  --text-strong: #f6f9fc;
+  --muted: #8a99ac;
+  --muted-2: #64748b;
+  --accent: #38bdc9;
+  --accent-strong: #5fd4de;
+  --accent-soft: rgba(56, 189, 201, 0.12);
+  --ok: #3fb37f;
+  --warn: #f5a524;
+  --bad: #e5484d;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #f4f6f9;
+  --bg-grid: rgba(15, 22, 32, 0.03);
+  --surface: #ffffff;
+  --surface-2: #eef2f7;
+  --surface-3: #e4eaf1;
+  --border: #d8e0ea;
+  --border-strong: #c2cddb;
+  --text: #1b2530;
+  --text-strong: #0c141d;
+  --muted: #5a6b7d;
+  --muted-2: #7d8b9b;
+  --accent: #0b8f9c;
+  --accent-strong: #0a7d89;
+  --accent-soft: rgba(11, 143, 156, 0.1);
+  --ok: #1f8f5f;
+  --warn: #b9761a;
+  --bad: #c62c31;
+  --shadow-panel: 0 24px 60px -24px rgba(27, 37, 48, 0.28);
+  color-scheme: light;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

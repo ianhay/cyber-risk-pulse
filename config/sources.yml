@@ -1,0 +1,50 @@
+# Cyber Risk Pulse - source endpoint configuration
+#
+# All upstream URLs live here so that an endpoint change is a one-line edit
+# rather than a code change. Verified against official documentation on
+# 2026-07-23; re-verify before relying on production ingestion (see
+# docs/source_licences.md).
+
+cisa_kev:
+  name: "CISA Known Exploited Vulnerabilities"
+  catalog_page: "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+  feed_json: "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
+  feed_csv: "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.csv"
+  # Reject an ingestion run that returns fewer than this many KEV rows.
+  min_expected_rows: 500
+
+nvd:
+  name: "NIST National Vulnerability Database CVE API 2.0"
+  docs: "https://nvd.nist.gov/developers/vulnerabilities"
+  cve_api: "https://services.nvd.nist.gov/rest/json/cves/2.0"
+  # NVD default page size. A single request may not exceed 2000.
+  results_per_page: 2000
+  # A single lastMod date-range request may not span more than 120 days.
+  max_range_days: 120
+  # Rolling window of CVEs to retrieve (published or modified within N days).
+  rolling_window_days: 365
+  # Polite request spacing (seconds). NVD recommends >=6s without a key,
+  # and permits a much higher rate with a key. The key is optional and is
+  # only ever read from the NVD_API_KEY GitHub Actions secret.
+  request_delay_seconds_no_key: 6.0
+  request_delay_seconds_with_key: 0.6
+  # Enrich KEV CVEs that fall outside the rolling window using batched
+  # cveId lookups, this many IDs per batch.
+  enrich_batch_size: 50
+
+epss:
+  name: "FIRST Exploit Prediction Scoring System"
+  docs: "https://www.first.org/epss/api"
+  api: "https://api.first.org/data/v1/epss"
+  # CVEs per comma-separated batch request.
+  batch_size: 100
+  # Historical scores available from this date per official docs.
+  history_start: "2021-04-14"
+
+http:
+  # Shared HTTP behaviour for all adapters.
+  timeout_seconds: 30
+  max_retries: 4
+  backoff_base_seconds: 2.0
+  backoff_max_seconds: 60.0
+  user_agent: "cyber-risk-pulse/0.1.0 (+https://github.com/OWNER/cyber-risk-pulse)"

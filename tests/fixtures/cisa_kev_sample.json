@@ -1,0 +1,56 @@
+{
+  "title": "CISA Catalog of Known Exploited Vulnerabilities",
+  "catalogVersion": "2026.07.23",
+  "dateReleased": "2026-07-23T13:00:00.0000Z",
+  "count": 4,
+  "vulnerabilities": [
+    {
+      "cveID": "CVE-2026-10001",
+      "vendorProject": "Microsoft",
+      "product": "Windows Server",
+      "vulnerabilityName": "Windows Server Print RCE",
+      "dateAdded": "2026-07-18",
+      "shortDescription": "Windows Server Print RCE",
+      "requiredAction": "Apply vendor updates per instructions.",
+      "dueDate": "2026-08-08",
+      "knownRansomwareCampaignUse": "Known",
+      "notes": ""
+    },
+    {
+      "cveID": "CVE-2026-10002",
+      "vendorProject": "Fortinet",
+      "product": "FortiOS",
+      "vulnerabilityName": "FortiOS SSL-VPN OOB Write",
+      "dateAdded": "2026-07-14",
+      "shortDescription": "FortiOS SSL-VPN OOB Write",
+      "requiredAction": "Apply mitigations per vendor advisory.",
+      "dueDate": "2026-08-04",
+      "knownRansomwareCampaignUse": "Unknown",
+      "notes": ""
+    },
+    {
+      "cveID": "CVE-2025-9002",
+      "vendorProject": "Cisco",
+      "product": "ASA",
+      "vulnerabilityName": "Cisco ASA Command Injection",
+      "dateAdded": "2026-01-20",
+      "shortDescription": "Cisco ASA Command Injection",
+      "requiredAction": "Apply updates; restrict management access.",
+      "dueDate": "2026-02-10",
+      "knownRansomwareCampaignUse": "Known",
+      "notes": ""
+    },
+    {
+      "cveID": "CVE-2025-9001",
+      "vendorProject": "SolarStack",
+      "product": "Orion Platform",
+      "vulnerabilityName": "Orion Auth Bypass",
+      "dateAdded": "2026-02-15",
+      "shortDescription": "Orion Auth Bypass",
+      "requiredAction": "Apply hotfix and rotate credentials.",
+      "dueDate": "2026-03-08",
+      "knownRansomwareCampaignUse": "Unknown",
+      "notes": ""
+    }
+  ]
+}

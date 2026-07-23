@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
+    <meta name="color-scheme" content="dark light" />
+    <meta
+      name="description"
+      content="Cyber Risk Pulse - an open-data monitor of exploited and high-likelihood vulnerabilities, combining CISA KEV, NVD and FIRST EPSS into transparent threat-priority tiers."
+    />
+    <title>Cyber Risk Pulse</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#queue">Skip to priority queue</a>
+    <div class="app" id="app">
+      <header class="masthead" id="masthead"></header>
+
+      <div id="errorSlot" role="alert"></div>
+      <div id="bannerSlot"></div>
+
+      <section class="filters" id="filters" aria-label="Filters"></section>
+
+      <div id="dashboard">
+        <section class="section" aria-label="Key indicators">
+          <div class="kpi-grid" id="kpis"></div>
+        </section>
+
+        <section class="section" id="charts-section" aria-label="Trends and distributions">
+          <div class="section__head">
+            <h2 class="section__title">Signals</h2>
+            <span class="section__note">All charts reflect the active filters</span>
+          </div>
+          <div class="chart-grid" id="charts">
+            <div class="chart-card chart-card--wide">
+              <p class="chart-card__title">Volume over time</p>
+              <p class="chart-card__hint">New CVEs by publish date, with KEV additions overlaid.</p>
+              <div class="chart" id="chartTrend"></div>
+            </div>
+            <div class="chart-card">
+              <p class="chart-card__title">Priority distribution</p>
+              <p class="chart-card__hint">Records per threat-priority tier.</p>
+              <div class="chart" id="chartTiers"></div>
+            </div>
+            <div class="chart-card">
+              <p class="chart-card__title">Severity distribution</p>
+              <p class="chart-card__hint">CVSS base-score bands; unknown where no metric exists.</p>
+              <div class="chart" id="chartSeverity"></div>
+            </div>
+            <div class="chart-card">
+              <p class="chart-card__title">EPSS probability</p>
+              <p class="chart-card__hint">Distribution of exploitation probability.</p>
+              <div class="chart" id="chartEpss"></div>
+            </div>
+            <div class="chart-card">
+              <p class="chart-card__title">Top vendors</p>
+              <p class="chart-card__hint">Most frequent vendors in the current view.</p>
+              <div class="chart" id="chartVendors"></div>
+            </div>
+            <div class="chart-card chart-card--wide">
+              <p class="chart-card__title">Time from publish to KEV</p>
+              <p class="chart-card__hint">Days between CVE publication and CISA KEV listing.</p>
+              <div class="chart" id="chartTtk"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" aria-label="Priority queue">
+          <div class="section__head">
+            <h2 class="section__title">Priority queue</h2>
+            <span class="section__note">Select a row for full detail and rationale</span>
+          </div>
+          <div class="queue" id="queue"></div>
+        </section>
+      </div>
+
+      <section class="section hidden" id="methodology" aria-label="Methodology"></section>
+
+      <footer class="footer">
+        <span>Cyber Risk Pulse · open data from CISA KEV, NVD and FIRST EPSS · not affiliated with those bodies.</span>
+        <span>External threat priority, not asset-specific risk.</span>
+      </footer>
+    </div>
+
+    <div class="overlay" id="detailOverlay" data-open="false"></div>
+    <aside class="detail" id="detailPanel" data-open="false" aria-hidden="true" aria-label="Vulnerability detail" role="dialog"></aside>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

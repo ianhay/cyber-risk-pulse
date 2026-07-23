@@ -1,0 +1,29 @@
+[project]
+name = "cyber-risk-pulse-ingestion"
+version = "0.1.0"
+description = "Data ingestion for the Cyber Risk Pulse dashboard"
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.31,<3",
+    "pydantic>=2.5,<3",
+    "PyYAML>=6,<7",
+    "python-dateutil>=2.8,<3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+
+[project.scripts]
+crp-refresh = "ingestion.cli:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["ingestion", "ingestion.sources"]
