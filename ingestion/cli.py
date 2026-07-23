@@ -76,7 +76,7 @@ def _load_kev_live(client: HttpClient, config: Config) -> tuple[dict[str, KevInf
 
 
 def _load_nvd_live(
-    client: HttpClient, config: Config, kev_ids: set[str]
+    client: HttpClient, config: Config, kev: dict[str, KevInfo]
 ) -> tuple[dict[str, Vulnerability], SourceStatus]:
     cfg = config.sources["nvd"]
     api_key = config.nvd_api_key
@@ -91,7 +91,12 @@ def _load_nvd_live(
             api_key=api_key,
         )
         by_id = {v.cve_id: v for v in records}
-        missing = [c for c in kev_ids if c not in by_id]
+        missing = _kev_ids_to_enrich(
+            [c for c in kev if c not in by_id],
+            kev,
+            max_age_days=int(cfg.get("enrich_max_age_days", 120)),
+            max_count=int(cfg.get("enrich_max_count", 150)),
+        )
         if missing:
             for enriched in nvd.enrich_cve_ids(client, cfg["cve_api"], missing, delay=delay, api_key=api_key):
                 by_id[enriched.cve_id] = enriched
@@ -107,7 +112,41 @@ def _load_nvd_live(
         return {}, SourceStatus(source="nvd", ok=False, message=str(exc))
 
 
-def _load_epss_live(client: HttpClient, config: Config, cve_ids: list[str]):
+def _kev_ids_to_enrich(
+    candidate_ids: list[str],
+    kev: dict[str, KevInfo],
+    *,
+    max_age_days: int,
+    max_count: int,
+) -> list[str]:
+    """Bound per-CVE KEV enrichment so a live run stays fast.
+
+    NVD offers no bulk cveId lookup, so each enrichment is one request. Against
+    the full historical KEV catalogue that would be ~1000+ sequential requests.
+    We only enrich recently added KEV entries (most likely to still be in active
+    remediation) and cap the total. Older KEV CVEs still appear as records built
+    from the KEV feed itself and are P1 regardless of CVSS, so the cap costs
+    detail, never a missing known-exploited vulnerability.
+    """
+    cutoff = datetime.now(timezone.utc).date()
+    kept: list[tuple[str, str]] = []
+    for cve_id in candidate_ids:
+        added = (kev.get(cve_id).date_added if kev.get(cve_id) else None) or ""
+        try:
+            added_date = datetime.fromisoformat(added).date()
+        except ValueError:
+            # No usable date - enrich it (it is unusual and worth the detail),
+            # but it still competes for the cap below.
+            kept.append((cve_id, ""))
+            continue
+        if (cutoff - added_date).days <= max_age_days:
+            kept.append((cve_id, added))
+    # Most recent first, then apply the hard cap.
+    kept.sort(key=lambda pair: pair[1], reverse=True)
+    return [cve_id for cve_id, _ in kept[:max_count]]
+
+
+
     cfg = config.sources["epss"]
     try:
         scores = epss.fetch_epss(client, cfg["api"], cve_ids, batch_size=int(cfg["batch_size"]))
@@ -192,7 +231,7 @@ def run_pipeline(
         client = _make_client(config)
         kev, kev_status = _load_kev_live(client, config)
         statuses.append(kev_status)
-        nvd_records, nvd_status = _load_nvd_live(client, config, set(kev.keys()))
+        nvd_records, nvd_status = _load_nvd_live(client, config, kev)
         statuses.append(nvd_status)
         all_ids = sorted(set(kev.keys()) | set(nvd_records.keys()))
         epss_scores, epss_status = _load_epss_live(client, config, all_ids)
