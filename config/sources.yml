@@ -37,7 +37,7 @@ nvd:
   # Only enrich KEV added within this many days:
   enrich_max_age_days: 120
   # ...never issue more than this many enrichment lookups per run:
-  enrich_max_count: 100
+  enrich_max_count: 0
   # ...and stop enriching once this wall-clock budget (seconds) is spent, so a
   # slow or throttled NVD can never stall the whole deploy. Set to 0 to disable
   # enrichment entirely (older KEV then shows KEV-only detail).
