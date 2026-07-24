@@ -98,14 +98,7 @@ def _load_nvd_live(
             max_count=int(cfg.get("enrich_max_count", 150)),
         )
         if missing:
-            for enriched in nvd.enrich_cve_ids(
-                client,
-                cfg["cve_api"],
-                missing,
-                delay=delay,
-                api_key=api_key,
-                time_budget=float(cfg.get("enrich_time_budget_seconds", 90)),
-            ):
+            for enriched in nvd.enrich_cve_ids(client, cfg["cve_api"], missing, delay=delay, api_key=api_key):
                 by_id[enriched.cve_id] = enriched
         status = SourceStatus(
             source="nvd",

@@ -23,12 +23,11 @@ nvd:
   max_range_days: 120
   # Rolling window of CVEs to retrieve (published or modified within N days).
   rolling_window_days: 90
-  # Polite request spacing (seconds). NVD's keyed limit is 50 requests per
-  # rolling 30s == 0.6s each: sitting exactly on that boundary triggers 429s,
-  # each of which then costs retry backoff. 1.0s (30 per 30s) stays safely
-  # under it. Without a key NVD recommends >=6s.
+  # Polite request spacing (seconds). NVD recommends >=6s without a key,
+  # and permits a much higher rate with a key. The key is optional and is
+  # only ever read from the NVD_API_KEY GitHub Actions secret.
   request_delay_seconds_no_key: 6.0
-  request_delay_seconds_with_key: 1.0
+  request_delay_seconds_with_key: 0.6
   # KEV CVEs outside the rolling window are enriched with per-CVE NVD lookups
   # to attach CVSS/CPE detail. NVD has no bulk cveId endpoint, so this is one
   # request each - bound it so runs stay fast. Older KEV entries still appear
@@ -36,12 +35,8 @@ nvd:
   # regardless of CVSS, so nothing critical is lost when enrichment is capped.
   # Only enrich KEV added within this many days:
   enrich_max_age_days: 120
-  # ...never issue more than this many enrichment lookups per run:
-  enrich_max_count: 100
-  # ...and stop enriching once this wall-clock budget (seconds) is spent, so a
-  # slow or throttled NVD can never stall the whole deploy. Set to 0 to disable
-  # enrichment entirely (older KEV then shows KEV-only detail).
-  enrich_time_budget_seconds: 90
+  # ...and never issue more than this many enrichment lookups per run:
+  enrich_max_count: 150
 
 epss:
   name: "FIRST Exploit Prediction Scoring System"
@@ -55,10 +50,7 @@ epss:
 http:
   # Shared HTTP behaviour for all adapters.
   timeout_seconds: 30
-  # Keep retry cost low: a persistently rate-limited request must fail fast, not
-  # burn ~30s of backoff. 2 retries with a 15s ceiling => <=6s wasted per dead
-  # request (2s + 4s), so a throttling episode can't run the job for an hour.
-  max_retries: 2
+  max_retries: 4
   backoff_base_seconds: 2.0
-  backoff_max_seconds: 15.0
+  backoff_max_seconds: 60.0
   user_agent: "cyber-risk-pulse/0.1.0 (+https://github.com/OWNER/cyber-risk-pulse)"

@@ -1,0 +1,6 @@
+{
+  "$comment": "Copy to watchlist.json to highlight vendors, products or CVEs you care about. Optional; the dashboard works without it. Never put secrets here - this file is served publicly.",
+  "vendors": ["Microsoft", "Cisco", "Fortinet", "Ivanti", "Citrix"],
+  "products": ["fortios", "netscaler_adc", "connect_secure"],
+  "cves": ["CVE-2026-10001"]
+}

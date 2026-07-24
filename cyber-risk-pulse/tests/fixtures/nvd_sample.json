@@ -1,0 +1,729 @@
+{
+  "resultsPerPage": 12,
+  "startIndex": 0,
+  "totalResults": 12,
+  "format": "NVD_CVE",
+  "version": "2.0",
+  "vulnerabilities": [
+    {
+      "cve": {
+        "id": "CVE-2026-10001",
+        "vulnStatus": "Analyzed",
+        "published": "2026-07-05T14:00:00.000",
+        "lastModified": "2026-07-19T09:12:00.000",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "A use-after-free in the Windows Server print subsystem allows remote code execution when a crafted job is processed."
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "3.1",
+                "baseScore": 9.8,
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                "baseSeverity": "CRITICAL"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-416"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-10001",
+            "source": "nvd@nist.gov"
+          },
+          {
+            "url": "https://vendor.example/advisory/CVE-2026-10001",
+            "source": "vendor"
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "negate": false,
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:microsoft:windows_server:*:*:*:*:*:*:*:*"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-10002",
+        "vulnStatus": "Analyzed",
+        "published": "2026-06-28T11:00:00.000",
+        "lastModified": "2026-07-15T16:40:00.000",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "An out-of-bounds write in the FortiOS SSL-VPN portal permits authenticated code execution."
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "3.1",
+                "baseScore": 8.8,
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+                "baseSeverity": "HIGH"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-787"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-10002",
+            "source": "nvd@nist.gov"
+          },
+          {
+            "url": "https://vendor.example/advisory/CVE-2026-10002",
+            "source": "vendor"
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "negate": false,
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:fortinet:fortios:*:*:*:*:*:*:*:*"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-10003",
+        "vulnStatus": "Analyzed",
+        "published": "2026-07-10T08:30:00.000",
+        "lastModified": "2026-07-18T08:30:00.000",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "A path traversal in mod_rewrite lets an unauthenticated attacker read files outside the document root."
+          }
+        ],
+        "metrics": {
+          "cvssMetricV40": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "4.0",
+                "baseScore": 9.1,
+                "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N",
+                "baseSeverity": "CRITICAL"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-22"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-10003",
+            "source": "nvd@nist.gov"
+          },
+          {
+            "url": "https://vendor.example/advisory/CVE-2026-10003",
+            "source": "vendor"
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "negate": false,
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:apache:http_server:*:*:*:*:*:*:*:*"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-10004",
+        "vulnStatus": "Analyzed",
+        "published": "2026-05-20T10:00:00.000",
+        "lastModified": "2026-07-01T10:00:00.000",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Unsafe deserialization in the WebLogic T3 listener can lead to remote code execution."
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "3.1",
+                "baseScore": 8.2,
+                "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:L",
+                "baseSeverity": "HIGH"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-502"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-10004",
+            "source": "nvd@nist.gov"
+          },
+          {
+            "url": "https://vendor.example/advisory/CVE-2026-10004",
+            "source": "vendor"
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "negate": false,
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:oracle:weblogic_server:*:*:*:*:*:*:*:*"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-10005",
+        "vulnStatus": "Analyzed",
+        "published": "2026-07-12T12:00:00.000",
+        "lastModified": "2026-07-14T12:00:00.000",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "A type confusion in Acrobat Reader allows code execution when a victim opens a malicious PDF."
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "3.1",
+                "baseScore": 9.3,
+                "vectorString": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:H",
+                "baseSeverity": "CRITICAL"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-843"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-10005",
+            "source": "nvd@nist.gov"
+          },
+          {
+            "url": "https://vendor.example/advisory/CVE-2026-10005",
+            "source": "vendor"
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "negate": false,
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:adobe:acrobat_reader:*:*:*:*:*:*:*:*"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-10006",
+        "vulnStatus": "Analyzed",
+        "published": "2026-07-08T09:00:00.000",
+        "lastModified": "2026-07-17T09:00:00.000",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "An out-of-bounds read in the V8 engine can disclose memory contents to a crafted web page."
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "3.1",
+                "baseScore": 6.5,
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N",
+                "baseSeverity": "MEDIUM"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-125"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-10006",
+            "source": "nvd@nist.gov"
+          },
+          {
+            "url": "https://vendor.example/advisory/CVE-2026-10006",
+            "source": "vendor"
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "negate": false,
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:google:chrome:*:*:*:*:*:*:*:*"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-10007",
+        "vulnStatus": "Analyzed",
+        "published": "2026-04-15T13:00:00.000",
+        "lastModified": "2026-06-30T13:00:00.000",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Missing authentication for a vCenter management endpoint exposes inventory data."
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "3.1",
+                "baseScore": 7.5,
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+                "baseSeverity": "HIGH"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-306"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-10007",
+            "source": "nvd@nist.gov"
+          },
+          {
+            "url": "https://vendor.example/advisory/CVE-2026-10007",
+            "source": "vendor"
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "negate": false,
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:vmware:vcenter_server:*:*:*:*:*:*:*:*"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-10008",
+        "vulnStatus": "Analyzed",
+        "published": "2026-06-02T15:00:00.000",
+        "lastModified": "2026-07-02T15:00:00.000",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "A resource-exhaustion flaw in NetScaler ADC allows a denial of service under crafted TLS load."
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "3.1",
+                "baseScore": 5.9,
+                "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                "baseSeverity": "MEDIUM"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-400"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-10008",
+            "source": "nvd@nist.gov"
+          },
+          {
+            "url": "https://vendor.example/advisory/CVE-2026-10008",
+            "source": "vendor"
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "negate": false,
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:citrix:netscaler_adc:*:*:*:*:*:*:*:*"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-10009",
+        "vulnStatus": "Modified",
+        "published": "2026-03-11T07:00:00.000",
+        "lastModified": "2026-05-11T07:00:00.000",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "An information exposure in Connect Secure reveals limited configuration details to an authenticated user."
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "3.1",
+                "baseScore": 4.3,
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+                "baseSeverity": "MEDIUM"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-200"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-10009",
+            "source": "nvd@nist.gov"
+          },
+          {
+            "url": "https://vendor.example/advisory/CVE-2026-10009",
+            "source": "vendor"
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "negate": false,
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:ivanti:connect_secure:*:*:*:*:*:*:*:*"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-10010",
+        "vulnStatus": "Awaiting Analysis",
+        "published": "2026-07-01T06:00:00.000",
+        "lastModified": "2026-07-01T06:00:00.000",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "A reported issue in Cisco IOS XE is awaiting analysis; severity metrics are not yet available."
+          }
+        ],
+        "metrics": {},
+        "weaknesses": [],
+        "references": [
+          {
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-10010",
+            "source": "nvd@nist.gov"
+          },
+          {
+            "url": "https://vendor.example/advisory/CVE-2026-10010",
+            "source": "vendor"
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "negate": false,
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:cisco:ios_xe:*:*:*:*:*:*:*:*"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2025-9002",
+        "vulnStatus": "Analyzed",
+        "published": "2025-11-04T10:00:00.000",
+        "lastModified": "2026-07-10T10:00:00.000",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "A command injection in the Cisco ASA web interface permits authenticated command execution."
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "3.1",
+                "baseScore": 7.2,
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:L/A:N",
+                "baseSeverity": "HIGH"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-78"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-9002",
+            "source": "nvd@nist.gov"
+          },
+          {
+            "url": "https://vendor.example/advisory/CVE-2025-9002",
+            "source": "vendor"
+          }
+        ],
+        "configurations": [
+          {
+            "nodes": [
+              {
+                "operator": "OR",
+                "negate": false,
+                "cpeMatch": [
+                  {
+                    "vulnerable": true,
+                    "criteria": "cpe:2.3:a:cisco:asa:*:*:*:*:*:*:*:*"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "cve": {
+        "id": "CVE-2026-19999",
+        "vulnStatus": "Rejected",
+        "published": "2026-07-01T00:00:00.000",
+        "lastModified": "2026-07-02T00:00:00.000",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "** REJECT ** This candidate was withdrawn by its CNA."
+          }
+        ],
+        "metrics": {},
+        "references": [],
+        "configurations": [],
+        "weaknesses": []
+      }
+    }
+  ]
+}

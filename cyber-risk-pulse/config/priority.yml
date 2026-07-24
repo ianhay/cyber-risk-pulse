@@ -1,0 +1,54 @@
+# Cyber Risk Pulse - prioritisation rules
+#
+# These tiers express EXTERNAL threat priority from public evidence. They are
+# NOT an organisation-specific risk score: they do not know whether a product
+# is present or exposed in your environment. Thresholds below are starting
+# defaults, not a standard. They are surfaced verbatim in the dashboard
+# methodology view.
+#
+# Evaluation: a record is assigned the FIRST tier (p1 -> p4) whose condition
+# set matches. Every assignment records human-readable reasons.
+#
+# Condition vocabulary:
+#   kev: true                 -> record is in the CISA KEV catalogue
+#   epss_gte: <0..1>          -> EPSS probability >= value (null EPSS never matches)
+#   epss_percentile_gte: <0..1> -> EPSS percentile >= value
+#   cvss_gte: <0..10>         -> CVSS base score >= value (null CVSS never matches)
+#   published_within_days: N  -> CVE published within the last N days
+# Combinators:
+#   any: [ ... ]  -> at least one child matches
+#   all: [ ... ]  -> every child matches
+
+priority_rules:
+  p1:
+    any:
+      - kev: true
+      - all:
+          - epss_gte: 0.50
+          - cvss_gte: 9.0
+  p2:
+    any:
+      - epss_percentile_gte: 0.99
+      - all:
+          - epss_gte: 0.10
+          - cvss_gte: 8.0
+      - all:
+          - cvss_gte: 9.0
+          - published_within_days: 30
+  p3:
+    any:
+      - cvss_gte: 7.0
+      - epss_percentile_gte: 0.90
+  p4:
+    default: true
+
+# Human-readable tier labels used in the UI and exports.
+tier_labels:
+  P1: "Priority 1 - urgent"
+  P2: "Priority 2 - high attention"
+  P3: "Priority 3 - monitor"
+  P4: "Priority 4 - background"
+
+# KEV membership is a hard override: it always maps to P1 regardless of the
+# rules above. Kept explicit so the behaviour is obvious in configuration.
+kev_forces_p1: true

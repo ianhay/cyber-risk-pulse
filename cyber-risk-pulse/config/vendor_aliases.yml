@@ -1,0 +1,46 @@
+# Cyber Risk Pulse - vendor normalisation table
+#
+# NVD CPE vendor tokens and CISA vendorProject strings vary in spelling and
+# case for the same organisation. This table maps known raw variants to a
+# canonical display name. Raw values are always preserved on the record; this
+# only affects the display/grouping name. Never invent a vendor that upstream
+# data did not provide - only fold known variants together.
+#
+# Format:  canonical_name: [ raw_variant, raw_variant, ... ]
+# Matching is case-insensitive on the raw token.
+
+canonical:
+  Microsoft:
+    - microsoft
+    - microsoft_corporation
+    - microsoft corp
+  Cisco:
+    - cisco
+    - cisco_systems
+    - cisco systems
+  Fortinet:
+    - fortinet
+    - fortinet_inc
+  Apache:
+    - apache
+    - apache_software_foundation
+    - the apache software foundation
+  "Google":
+    - google
+    - google_llc
+  Oracle:
+    - oracle
+    - oracle_corporation
+  Adobe:
+    - adobe
+    - adobe_inc
+    - adobe systems
+  Ivanti:
+    - ivanti
+    - ivanti_inc
+  Citrix:
+    - citrix
+    - citrix_systems
+  VMware:
+    - vmware
+    - vmware_inc

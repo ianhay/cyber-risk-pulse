@@ -17,8 +17,6 @@ testable from fixtures without a network.
 """
 from __future__ import annotations
 
-import sys
-import time
 from datetime import datetime, timedelta, timezone
 from typing import Any, Iterable
 
@@ -188,37 +186,18 @@ def enrich_cve_ids(
     *,
     delay: float,
     api_key: str | None,
-    time_budget: float | None = None,
 ) -> list[Vulnerability]:
     """Fetch specific CVE ids one per request (the API takes a single cveId).
 
-    Used for KEV CVEs that fall outside the rolling modification window. This is
-    best-effort detail enrichment, never a source of truth: a lookup that fails
-    or times out is skipped (the KEV record still exists via the KEV feed), and
-    the loop stops once ``time_budget`` seconds have elapsed so a slow or
-    throttled NVD can never stall the pipeline.
+    Used for KEV CVEs that fall outside the rolling modification window.
     """
     headers = {"apiKey": api_key} if api_key else {}
     out: list[Vulnerability] = []
-    started = time.monotonic()
-    attempted = 0
     for cve_id in cve_ids:
-        if time_budget is not None and (time.monotonic() - started) > time_budget:
-            print(
-                f"[warn] enrichment time budget ({time_budget:.0f}s) reached after "
-                f"{attempted} lookups; continuing with partial enrichment",
-                file=sys.stderr,
-            )
-            break
-        attempted += 1
-        try:
-            payload = client.get_json(
-                base_url, params={"cveId": cve_id}, headers=headers, delay=delay
-            )
-            out.extend(parse_nvd_page(payload))
-        except Exception as exc:  # noqa: BLE001 - enrichment is best-effort
-            print(f"[warn] enrichment lookup failed for {cve_id}: {exc}", file=sys.stderr)
-            continue
+        payload = client.get_json(
+            base_url, params={"cveId": cve_id}, headers=headers, delay=delay
+        )
+        out.extend(parse_nvd_page(payload))
     return out
 
 

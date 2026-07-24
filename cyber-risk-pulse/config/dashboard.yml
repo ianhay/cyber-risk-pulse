@@ -1,0 +1,42 @@
+# Cyber Risk Pulse - dashboard display configuration
+#
+# Terminology and thresholds that the frontend reads at build/generation time.
+# Nothing here is an assertion about a specific environment's risk.
+
+terminology:
+  # The handoff forbids presenting an external score as the viewer's actual
+  # enterprise risk. This label is used wherever the ranked tier is shown.
+  priority_label: "Threat priority"
+  priority_sublabel: "External prioritisation from public evidence"
+  index_label: "Exploit likelihood"
+
+methodology_statement: >-
+  Priority reflects public evidence of exploitation, predicted exploitation
+  likelihood, technical severity and recency. It does not account for whether
+  a product is present or exposed in your environment.
+
+# Time windows offered by the global filter (days). "custom" is always allowed.
+time_windows_days: [7, 30, 90, 365]
+default_window_days: 30
+
+thresholds:
+  # A CVE counts as "high EPSS" in KPIs when probability >= this value.
+  high_epss_probability: 0.10
+  # CVSS base score at or above this is "critical".
+  critical_cvss: 9.0
+  # CVSS base score at or above this is "high".
+  high_cvss: 7.0
+
+# Freshness policy for the source-health strip (hours). Beyond max_age a
+# source is "stale" and a degraded/stale banner is shown.
+freshness:
+  cisa_kev_warn_hours: 36
+  cisa_kev_max_hours: 96
+  nvd_warn_hours: 36
+  nvd_max_hours: 96
+  epss_warn_hours: 36
+  epss_max_hours: 96
+
+# Priority ramp identifiers only. Actual colours live in CSS theme variables
+# so that colour is never baked into data. Text labels accompany every badge.
+priority_order: ["P1", "P2", "P3", "P4"]
