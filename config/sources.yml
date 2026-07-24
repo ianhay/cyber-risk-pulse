@@ -22,7 +22,7 @@ nvd:
   # A single lastMod date-range request may not span more than 120 days.
   max_range_days: 120
   # Rolling window of CVEs to retrieve (published or modified within N days).
-  rolling_window_days: 90
+  rolling_window_days: 30
   # Polite request spacing (seconds). NVD's keyed limit is 50 requests per
   # rolling 30s == 0.6s each: sitting exactly on that boundary triggers 429s,
   # each of which then costs retry backoff. 1.0s (30 per 30s) stays safely
