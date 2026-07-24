@@ -42,7 +42,7 @@ jobs:
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
           GITHUB_SHA: ${{ github.sha }}
-        run: python scripts/refresh_data.py
+        run: python scripts/build_fixture_site.py
 
       - name: Validate generated site data
         run: python scripts/validate_site.py
