@@ -38,11 +38,23 @@ jobs:
           restore-keys: |
             crp-data-
 
-      - name: Refresh from live sources
+      - name: Refresh from live sources (hard timeout, non-fatal)
+        id: refresh
+        timeout-minutes: 5
+        continue-on-error: true
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
           GITHUB_SHA: ${{ github.sha }}
         run: python scripts/refresh_data.py
+
+      - name: Ensure the site has data
+        run: |
+          if [ ! -s public/data/current_vulnerabilities.json ]; then
+            echo "No data after refresh; building from committed fixtures so the deploy still succeeds."
+            python scripts/build_fixture_site.py
+          else
+            echo "Data present (live or last-known-good); continuing to build."
+          fi
 
       - name: Validate generated site data
         run: python scripts/validate_site.py
